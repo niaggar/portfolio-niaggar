@@ -5,3 +5,7 @@ declare module "*.png" {
 }
 
 // Agregar mas declaraciones segun la extención si son necesarias
+declare module "*.svg" {
+  const value: any;
+  export default value;
+}
