@@ -14,7 +14,7 @@ class App extends LitElement {
   static styles = css`
     #root {
       width: 100%;
-      min-height: 300vh;
+      min-height: 100vh;
       background: var(--background-prin);
     }
 
@@ -22,10 +22,11 @@ class App extends LitElement {
       width: 100%;
       height: 10px;
       background-color: var(--color-main);
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       z-index: 5;
+      box-shadow: 0px 0px 2px 0px var(--color-main);
     }
   `
 

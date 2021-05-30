@@ -1,0 +1,19 @@
+/* Estilos globales de la aplicación */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400&display=swap');
+
+html {
+  /* Colors */
+  --background-prin: #333333;
+  --background-sec: #1D1E1E;
+  --color-main: #00CCA5;
+  --color-text: #F7F7F7;
+}
+
+* {
+  font-family: sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text);
+}

@@ -3,4 +3,4 @@ import './index.html'
 import './app'
 
 // En este archivo realizar el import de estilos globales
-// import './assets/styles/styles.scss'
+import './assets/styles/styles.css'
