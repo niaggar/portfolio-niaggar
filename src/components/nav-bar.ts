@@ -15,11 +15,8 @@ class NavBar extends LitElement {
   // Uso de styles para generar el css limitado al componente
   static styles = css`
     :host {
-      position: fixed;
-      left: 0;
-      top: 0;
+      position: relative;
       height: 100vh;
-      width: 300px;
       background-color: var(--background-sec);
       z-index: 3;
       padding: 0 30px 0 50px;
