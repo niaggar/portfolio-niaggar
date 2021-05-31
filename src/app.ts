@@ -79,7 +79,6 @@ class App extends LitElement {
 
   firstUpdated() {
     // window.scrollTo(0, 0)
-    this._changeRoute('home')
     let height = this.shadowRoot!.querySelector('#home')!.getBoundingClientRect().height
     this.distances = [
       {
@@ -134,6 +133,7 @@ class App extends LitElement {
         this.selected = 'contact'
       }
     })
+    this._changeRoute('home')
   }
 
   // Uso de render para generar el componente en el html

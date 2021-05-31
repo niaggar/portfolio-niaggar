@@ -90,6 +90,17 @@ class NavBar extends LitElement {
       box-shadow: 0px 0px 8px 0px #0000008a;
       padding: 12px;
     }
+
+    .active {
+      background: #f7f7f70c;
+      box-shadow: 0px 0px 8px 0px #0000008a;
+      padding: 12px;
+    }
+    
+    .active a {
+      color: var(--color-main);
+      font-weight: bold;
+    }
   `
 
   // Uso de render para generar el componente en el html
@@ -100,11 +111,21 @@ class NavBar extends LitElement {
         <img src=${logo} alt="Niaggar">
         <div class="hyperlinks">
           <ul>
-            <li @click=${() => {this._changeRoute('home')}}><a>Home</a></li>
-            <li @click=${() => {this._changeRoute('about')}}><a>Acerca de mi</a></li>
-            <li @click=${() => {this._changeRoute('knowledge')}}><a>Conociminetos</a></li>
-            <li @click=${() => {this._changeRoute('proyects')}}><a>Proyectos</a></li>
-            <li @click=${() => {this._changeRoute('contact')}}><a>Contactame</a></li>
+            <li id="home" class="active" @click=${() => {this._changeRoute('home')}}>
+              <a>Home</a>
+            </li>
+            <li id="about" @click=${() => {this._changeRoute('about')}}>
+              <a>Acerca de mi</a>
+            </li>
+            <li id="knowledge" @click=${() => {this._changeRoute('knowledge')}}>
+              <a>Conociminetos</a>
+            </li>
+            <li id="proyects" @click=${() => {this._changeRoute('proyects')}}>
+              <a>Proyectos</a>
+            </li>
+            <li id="contact" @click=${() => {this._changeRoute('contact')}}>
+              <a>Contactame</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -116,5 +137,28 @@ class NavBar extends LitElement {
        bubbles: true,
        detail: { route }
     }))
+    this._showActive(route)
+  }
+
+  private _showActive(route: Route) {
+
+    const elements = {
+      'home': this.shadowRoot!.getElementById('home')!,
+      'about': this.shadowRoot!.getElementById('about')!,
+      'knowledge': this.shadowRoot!.getElementById('knowledge')!,
+      'proyects': this.shadowRoot!.getElementById('proyects')!,
+      'contact': this.shadowRoot!.getElementById('contact')!
+    }
+
+    let elementName: keyof typeof elements;
+    for (elementName in elements) {
+      elements[elementName]
+        .classList
+        .remove('active')
+    }
+
+    elements[route]
+      .classList
+      .add('active')
   }
 }
