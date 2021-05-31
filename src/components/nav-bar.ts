@@ -29,7 +29,7 @@ class NavBar extends LitElement {
       top: 0;
       left: 0;
       height: 100vh;
-      width: 270px;
+      width: 350px;
       background-color: var(--background-sec);
       z-index: 3;
       padding: 0 30px 0 50px;

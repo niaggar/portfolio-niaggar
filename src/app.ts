@@ -54,6 +54,8 @@ class App extends LitElement {
       grid-template-areas: 'navbar  webpage';
     }
 
+    * { box-sizing: border-box; }
+
     #line {
       width: 100%;
       height: 10px;
@@ -76,6 +78,7 @@ class App extends LitElement {
       scroll-snap-type: y mandatory;
       scroll-snap-points-y: repeat(100vh);
       display: grid;
+      background: var(--background-prin);
       grid-template-columns: auto;
       grid-template-rows: 100vh 100vh 100vh 100vh 100vh;
       grid-template-areas: 
@@ -84,6 +87,7 @@ class App extends LitElement {
         'know'
         'proyect'
         'contact';
+      box-sizing: border-box;
     }
   `
 
