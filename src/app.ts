@@ -1,9 +1,10 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
+// Importa la barra de navegacion
 import './components/nav-bar'
-import './components/web-page'
 
+// Importa las secciones de la pagina
 import './components/sections/home-sect'
 import './components/sections/about-sect'
 import './components/sections/contact-sect'
@@ -11,8 +12,10 @@ import './components/sections/knowledge-sect'
 import './components/sections/proyect-sect'
 
 
+// Define el tipo de valores que puede tener la ruta
 type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact'
 
+// Define el modelo que tienen los contenedores
 interface Distance {
   name: string
   range: {
@@ -21,6 +24,13 @@ interface Distance {
   }
 }
 
+
+// -------------------------------------------------- //
+// Componente principal que contiene toda la pagina.  //
+// -------------------------------------------------- //
+// Tiene por labor controlar el estado actual de la   //
+// ruta y contener en un solo lugar todo el contenido //
+// -------------------------------------------------- //
 @customElement('app-container')
 class App extends LitElement {
 
@@ -77,8 +87,9 @@ class App extends LitElement {
     }
   `
 
+  // Primera actualizacion de la pagina
   firstUpdated() {
-    // window.scrollTo(0, 0)
+    // Determina la posicion de cada seccion en la pagina
     let height = this.shadowRoot!.querySelector('#home')!.getBoundingClientRect().height
     this.distances = [
       {
@@ -117,37 +128,39 @@ class App extends LitElement {
         }
       },
     ]
-
+    // Agrega el vento que determina en que seccion de la 
+    // pagina se esta segun la posicion del scroll
     window.addEventListener('scroll', () => {
       const actualPos = window.pageYOffset
-      
-      if (actualPos < this.distances[0].range.top + 100) {
+      let offSet = 150
+      if (actualPos < this.distances[0].range.top + offSet) {
         this.selected = 'home'
-      } else if (actualPos < this.distances[1].range.top + 100) {
+      } else if (actualPos < this.distances[1].range.top + offSet) {
         this.selected = 'about'
-      } else if (actualPos < this.distances[2].range.top + 100) {
+      } else if (actualPos < this.distances[2].range.top + offSet) {
         this.selected = 'knowledge'
-      } else if (actualPos < this.distances[3].range.top + 100) {
+      } else if (actualPos < this.distances[3].range.top + offSet) {
         this.selected = 'proyects'
-      } else if (actualPos < this.distances[4].range.top + 100) {
+      } else if (actualPos < this.distances[4].range.top + offSet) {
         this.selected = 'contact'
       }
     })
-    this._changeRoute('home')
+    // Cada que se actualice la pagina regresa al home
+    setTimeout(() => {
+      this._changeRoute('home')
+      window.scrollTo(0, 0)
+    }, 300)
   }
 
   // Uso de render para generar el componente en el html
   render() {
     return html`
       <div id="line"></div>
-      <div 
-        id="root"
-      >
+      <div id="root">
         <nav-bar 
           @change-route=${(e: CustomEvent) => {this._changeRoute(e.detail.route!)}}
           selected=${this.selected}
         ></nav-bar>
-        <!-- <web-page></web-page> -->
         <div id="page">
           <home-sect id="home"></home-sect>
           <about-sect id="about"></about-sect>
@@ -159,6 +172,7 @@ class App extends LitElement {
     `
   }
 
+  // Metodo para cambiar la ruta - desplazar el scroll
   private _changeRoute(route: Route) {
     const obj = this.shadowRoot!.querySelector(`#${route}`)! as HTMLElement
     const startPos = window.pageYOffset;

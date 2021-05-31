@@ -1,15 +1,25 @@
 import { LitElement, html, css, PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
+// Importa el logo de la pagina
 import logo from '../assets/img/Logo_niaggar-07.svg'
 
-
+// Define el tipo de valores que puede tener la ruta
 type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact'
 
+
+// -------------------------------------------------- //
+// Componente que hace de barra de navegacion         //
+// -------------------------------------------------- //
+// Tiene por labor facilitar la interaccion con la    //
+// pagina, esta muestra las secciones que esta tiene  //
+// -------------------------------------------------- //
 @customElement('nav-bar')
 class NavBar extends LitElement {
 
   @property()
+  // Propiedad cambiante usdada para determinar la seccion
+  // actual de la pagina
   selected: Route = 'home'
 
   // Uso de styles para generar el css limitado al componente
@@ -106,12 +116,17 @@ class NavBar extends LitElement {
   // Uso de render para generar el componente en el html
   render() {
     return html`
+      <!-- :host hace de div general del componente -->
+      <!-- Linea punteada -->
       <div id="line"></div>
+      <!-- Contenedor de las secciones y el logo -->
       <div id="opt-container">
+        <!-- Logo de la pagina -->
         <img src=${logo} alt="Niaggar">
+        <!-- Enlaces a las secciones de la pagina -->
         <div class="hyperlinks">
           <ul>
-            <li id="home" class="active" @click=${() => {this._changeRoute('home')}}>
+            <li id="home" @click=${() => {this._changeRoute('home')}}>
               <a>Home</a>
             </li>
             <li id="about" @click=${() => {this._changeRoute('about')}}>
@@ -131,17 +146,30 @@ class NavBar extends LitElement {
       </div>
     `
   }
+  
+  // Primera actualizacion de la pagina
+  firstUpdated() {
+    // Activa dentro de la barra de navegacion la seccion
+    // en la que se encuentra el usuario actualmente
+    window.addEventListener('scroll', () => {
+      this._showActive(this.selected)
+    })
+  }
 
+  // Metodo para avisar el cambio de seccion
   private _changeRoute(route: Route) {
+    // Dispara el evento para cambiar la seccion
     this.dispatchEvent(new CustomEvent('change-route', {
        bubbles: true,
        detail: { route }
     }))
+    // Mostrar la seccion activa
     this._showActive(route)
   }
 
+  // Metodo para mostrar la seccion activa
   private _showActive(route: Route) {
-
+    // Obtiene los elementos de las secciones en la pagina
     const elements = {
       'home': this.shadowRoot!.getElementById('home')!,
       'about': this.shadowRoot!.getElementById('about')!,
@@ -149,14 +177,14 @@ class NavBar extends LitElement {
       'proyects': this.shadowRoot!.getElementById('proyects')!,
       'contact': this.shadowRoot!.getElementById('contact')!
     }
-
+    // Remueve la clase activa de todas las secciones
     let elementName: keyof typeof elements;
     for (elementName in elements) {
       elements[elementName]
         .classList
         .remove('active')
     }
-
+    // Agrega la seccion activa a la seccion actual
     elements[route]
       .classList
       .add('active')
