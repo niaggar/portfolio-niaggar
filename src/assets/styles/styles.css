@@ -8,6 +8,7 @@ html {
   --background-sec: #1D1E1E;
   --color-main: #00CCA5;
   --color-text: #F7F7F7;
+  scroll-behavior: smooth;
 }
 
 * {

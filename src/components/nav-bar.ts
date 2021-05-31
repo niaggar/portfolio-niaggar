@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html, css, PropertyValues } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 import logo from '../assets/img/Logo_niaggar-07.svg'
@@ -15,8 +15,11 @@ class NavBar extends LitElement {
   // Uso de styles para generar el css limitado al componente
   static styles = css`
     :host {
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
       height: 100vh;
+      width: 270px;
       background-color: var(--background-sec);
       z-index: 3;
       padding: 0 30px 0 50px;
@@ -97,11 +100,11 @@ class NavBar extends LitElement {
         <img src=${logo} alt="Niaggar">
         <div class="hyperlinks">
           <ul>
-            <li><a>Home</a></li>
-            <li><a>Acerca de mi</a></li>
-            <li><a>Conociminetos</a></li>
-            <li><a>Proyectos</a></li>
-            <li><a>Contactame</a></li>
+            <li @click=${() => {this._changeRoute('home')}}><a>Home</a></li>
+            <li @click=${() => {this._changeRoute('about')}}><a>Acerca de mi</a></li>
+            <li @click=${() => {this._changeRoute('knowledge')}}><a>Conociminetos</a></li>
+            <li @click=${() => {this._changeRoute('proyects')}}><a>Proyectos</a></li>
+            <li @click=${() => {this._changeRoute('contact')}}><a>Contactame</a></li>
           </ul>
         </div>
       </div>

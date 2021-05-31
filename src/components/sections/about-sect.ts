@@ -7,7 +7,6 @@ class AboutSect extends LitElement {
   static styles = css`
     :host {
       width: 100%;
-      height: 100vh;
       background: blue
     }
   `
@@ -15,8 +14,8 @@ class AboutSect extends LitElement {
   render() {
     return html`
       <div id="test">
-        <div><p>Hola</p></div>
+        <div><p>About</p></div>
       </div>
-      `
+    `
   }
 }
