@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js'
 
+import img from '../../assets/img/face-06.svg'
+
 
 @customElement('home-sect')
 class HomeSect extends LitElement {
@@ -20,7 +22,7 @@ class HomeSect extends LitElement {
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      flex-direction: row;
       border: 2px dashed #f7f7f745;
       width: 100%;
       height: 100%;
@@ -28,13 +30,13 @@ class HomeSect extends LitElement {
       padding: 15px;
     }
 
-    .content {
+    .content-txt {
       display: flex;
       justify-content: left;
       align-items: left;
       flex-direction: column;
       text-align: left;
-      border-left: 3px solid var(--color-main);
+      border-left: 4px solid var(--color-main);
       padding: 5px 0 5px 15px;
     }
 
@@ -53,14 +55,29 @@ class HomeSect extends LitElement {
       margin-top: 15px;
       font-size: 1.4rem;
       font-family: 'Source Sans Pro', sans-serif;
+      font-weight: 300;
+    }
+
+    .content-img {
+      width: 250px;
+      height: 250px;
+      margin-right: 30px;
+    }
+
+    .content-img img {
+      width: 100%;
+      height: 100%;
     }
   `
 
   render() {
     return html`
       <div id="border">
-        <div class="content">
-          <h1 class="title">Hola! <br>yo soy <span class="important">Nicolas</span></h1>
+        <div class="content-img">
+          <img src=${img}>
+        </div>
+        <div class="content-txt">
+          <h1 class="title">Hola! <br>soy <span class="important">Nicolas</span></h1>
           <p class="subtitle">Aspirante a desarrollador web<br> & data scientist...</p>
         </div>
       </div>
