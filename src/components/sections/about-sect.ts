@@ -1,11 +1,12 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js'
-
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('about-sect')
 class AboutSect extends LitElement {
   static styles = css`
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     :host {
       width: 100%;
@@ -35,17 +36,15 @@ class AboutSect extends LitElement {
       flex-direction: column;
       text-align: center;
     }
-  `
+  `;
 
   render() {
     return html`
       <div id="border">
         <div class="content">
-          <h2>
-            Acerca de mi
-          </h2>
+          <h2>Acerca de mi</h2>
         </div>
       </div>
-    `
+    `;
   }
 }
