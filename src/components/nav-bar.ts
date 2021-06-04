@@ -1,12 +1,11 @@
-import { LitElement, html, css, PropertyValues } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { LitElement, html, css, PropertyValues } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
 // Importa el logo de la pagina
-import logo from '../assets/img/Logo_niaggar-07.svg'
+import logo from '../assets/img/Logo_niaggar-07.svg';
 
 // Define el tipo de valores que puede tener la ruta
-type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact'
-
+type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact';
 
 // -------------------------------------------------- //
 // Componente que hace de barra de navegacion         //
@@ -16,11 +15,10 @@ type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact'
 // -------------------------------------------------- //
 @customElement('nav-bar')
 class NavBar extends LitElement {
-
   @property()
   // Propiedad cambiante usdada para determinar la seccion
   // actual de la pagina
-  selected: Route = 'home'
+  selected: Route = 'home';
 
   // Uso de styles para generar el css limitado al componente
   static styles = css`
@@ -33,7 +31,7 @@ class NavBar extends LitElement {
       background-color: var(--background-sec);
       z-index: 3;
       padding: 0 30px 0 50px;
-      box-shadow: 0px 0px 8px 0px rgba(0,0,0,1);
+      box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 1);
       display: flex;
       justify-content: center;
       flex-direction: column;
@@ -66,13 +64,13 @@ class NavBar extends LitElement {
       height: 300px;
       margin-top: 20px;
     }
-    
+
     ul {
       list-style: none;
       padding: 0;
     }
 
-    li { 
+    li {
       color: var(--color-text);
       width: 200px;
       text-decoration: none;
@@ -106,12 +104,12 @@ class NavBar extends LitElement {
       box-shadow: 0px 0px 8px 0px #0000008a;
       padding: 12px;
     }
-    
+
     .active a {
       color: var(--color-main);
       font-weight: bold;
     }
-  `
+  `;
 
   // Uso de render para generar el componente en el html
   render() {
@@ -122,71 +120,94 @@ class NavBar extends LitElement {
       <!-- Contenedor de las secciones y el logo -->
       <div id="opt-container">
         <!-- Logo de la pagina -->
-        <img src=${logo} alt="Niaggar">
+        <img src=${logo} alt="Niaggar" />
         <!-- Enlaces a las secciones de la pagina -->
         <div class="hyperlinks">
           <ul>
-            <li id="home" @click=${() => {this._changeRoute('home')}}>
+            <li
+              id="home"
+              @click=${() => {
+                this._changeRoute('home');
+              }}
+            >
               <a>Home</a>
             </li>
-            <li id="about" @click=${() => {this._changeRoute('about')}}>
+            <li
+              id="about"
+              @click=${() => {
+                this._changeRoute('about');
+              }}
+            >
               <a>Acerca de mi</a>
             </li>
-            <li id="knowledge" @click=${() => {this._changeRoute('knowledge')}}>
+            <li
+              id="knowledge"
+              @click=${() => {
+                this._changeRoute('knowledge');
+              }}
+            >
               <a>Conociminetos</a>
             </li>
-            <li id="proyects" @click=${() => {this._changeRoute('proyects')}}>
+            <li
+              id="proyects"
+              @click=${() => {
+                this._changeRoute('proyects');
+              }}
+            >
               <a>Proyectos</a>
             </li>
-            <li id="contact" @click=${() => {this._changeRoute('contact')}}>
+            <li
+              id="contact"
+              @click=${() => {
+                this._changeRoute('contact');
+              }}
+            >
               <a>Contactame</a>
             </li>
           </ul>
         </div>
       </div>
-    `
+    `;
   }
-  
+
   // Primera actualizacion de la pagina
   firstUpdated() {
     // Activa dentro de la barra de navegacion la seccion
     // en la que se encuentra el usuario actualmente
     window.addEventListener('scroll', () => {
-      this._showActive(this.selected)
-    })
+      this._showActive(this.selected);
+    });
   }
 
   // Metodo para avisar el cambio de seccion
   private _changeRoute(route: Route) {
     // Dispara el evento para cambiar la seccion
-    this.dispatchEvent(new CustomEvent('change-route', {
-       bubbles: true,
-       detail: { route }
-    }))
+    this.dispatchEvent(
+      new CustomEvent('change-route', {
+        bubbles: true,
+        detail: { route },
+      }),
+    );
     // Mostrar la seccion activa
-    this._showActive(route)
+    this._showActive(route);
   }
 
   // Metodo para mostrar la seccion activa
   private _showActive(route: Route) {
     // Obtiene los elementos de las secciones en la pagina
     const elements = {
-      'home': this.shadowRoot!.getElementById('home')!,
-      'about': this.shadowRoot!.getElementById('about')!,
-      'knowledge': this.shadowRoot!.getElementById('knowledge')!,
-      'proyects': this.shadowRoot!.getElementById('proyects')!,
-      'contact': this.shadowRoot!.getElementById('contact')!
-    }
+      home: this.shadowRoot!.getElementById('home')!,
+      about: this.shadowRoot!.getElementById('about')!,
+      knowledge: this.shadowRoot!.getElementById('knowledge')!,
+      proyects: this.shadowRoot!.getElementById('proyects')!,
+      contact: this.shadowRoot!.getElementById('contact')!,
+    };
     // Remueve la clase activa de todas las secciones
     let elementName: keyof typeof elements;
     for (elementName in elements) {
-      elements[elementName]
-        .classList
-        .remove('active')
+      elements[elementName].classList.remove('active');
     }
     // Agrega la seccion activa a la seccion actual
-    elements[route]
-      .classList
-      .add('active')
+    elements[route].classList.add('active');
   }
 }

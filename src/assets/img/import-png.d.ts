@@ -1,11 +1,11 @@
 // Declaración de como se importan imagenes con TS
-declare module "*.png" {
+declare module '*.png' {
   const value: any;
   export default value;
 }
 
 // Agregar mas declaraciones segun la extención si son necesarias
-declare module "*.svg" {
+declare module '*.svg' {
   const value: any;
   export default value;
 }

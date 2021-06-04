@@ -1,13 +1,16 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js';
 
-import img from '../../assets/img/face-06.svg'
-
+import img from '../../assets/img/face-06.svg';
 
 @customElement('home-sect')
 class HomeSect extends LitElement {
   static styles = css`
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :host {
       width: 100%;
@@ -68,19 +71,24 @@ class HomeSect extends LitElement {
       width: 100%;
       height: 100%;
     }
-  `
+  `;
 
   render() {
     return html`
       <div id="border">
         <div class="content-img">
-          <img src=${img}>
+          <img src=${img} />
         </div>
         <div class="content-txt">
-          <h1 class="title">Hola! <br>soy <span class="important">Nicolas</span></h1>
-          <p class="subtitle">Aspirante a desarrollador web<br> & data scientist...</p>
+          <h1 class="title">
+            Hola! <br />soy <span class="important">Nicolas</span>
+          </h1>
+          <p class="subtitle">
+            Aspirante a desarrollador web<br />
+            & data scientist...
+          </p>
         </div>
       </div>
-    `
+    `;
   }
 }
