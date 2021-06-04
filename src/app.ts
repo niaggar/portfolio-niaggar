@@ -14,14 +14,14 @@ import './components/sections/proyect-sect';
 // Define el tipo de valores que puede tener la ruta
 type Route = 'home' | 'about' | 'knowledge' | 'proyects' | 'contact';
 
-// Define el modelo que tienen los contenedores
-interface Distance {
-  name: string;
-  range: {
-    top: number;
-    down: number;
-  };
-}
+// Objeto que contiene la posicion respecto a la pagina de cada seccion
+type Distances = {
+  home: DOMRect;
+  about: DOMRect;
+  knowledge: DOMRect;
+  proyects: DOMRect;
+  contact: DOMRect;
+};
 
 // -------------------------------------------------- //
 // Componente principal que contiene toda la pagina.  //
@@ -31,13 +31,6 @@ interface Distance {
 // -------------------------------------------------- //
 @customElement('app-container')
 class App extends LitElement {
-  distances: Distance[];
-
-  constructor() {
-    super();
-    this.distances = [];
-  }
-
   @property()
   selected: Route = 'home';
 
@@ -92,78 +85,32 @@ class App extends LitElement {
   // Primera actualizacion de la pagina
   firstUpdated() {
     // Determina la posicion de cada seccion en la pagina
-    let height =
-      this.shadowRoot!.querySelector('#home')!.getBoundingClientRect().height;
-    this.distances = [
-      {
-        name: 'home',
-        range: {
-          top: this.shadowRoot!.querySelector('#home')!.getBoundingClientRect()
-            .top,
-          down:
-            this.shadowRoot!.querySelector('#home')!.getBoundingClientRect()
-              .top + height,
-        },
-      },
-      {
-        name: 'about',
-        range: {
-          top: this.shadowRoot!.querySelector('#about')!.getBoundingClientRect()
-            .top,
-          down:
-            this.shadowRoot!.querySelector('#about')!.getBoundingClientRect()
-              .top + height,
-        },
-      },
-      {
-        name: 'knowledge',
-        range: {
-          top: this.shadowRoot!.querySelector(
-            '#knowledge',
-          )!.getBoundingClientRect().top,
-          down:
-            this.shadowRoot!.querySelector(
-              '#knowledge',
-            )!.getBoundingClientRect().top + height,
-        },
-      },
-      {
-        name: 'proyects',
-        range: {
-          top: this.shadowRoot!.querySelector(
-            '#proyects',
-          )!.getBoundingClientRect().top,
-          down:
-            this.shadowRoot!.querySelector('#proyects')!.getBoundingClientRect()
-              .top + height,
-        },
-      },
-      {
-        name: 'contact',
-        range: {
-          top: this.shadowRoot!.querySelector(
-            '#contact',
-          )!.getBoundingClientRect().top,
-          down:
-            this.shadowRoot!.querySelector('#contact')!.getBoundingClientRect()
-              .top + height,
-        },
-      },
-    ];
-    // Agrega el vento que determina en que seccion de la
+    let distances: Distances = {
+      home: this.shadowRoot!.querySelector('#home')!.getBoundingClientRect(),
+      about: this.shadowRoot!.querySelector('#about')!.getBoundingClientRect(),
+      knowledge:
+        this.shadowRoot!.querySelector('#knowledge')!.getBoundingClientRect(),
+      proyects:
+        this.shadowRoot!.querySelector('#proyects')!.getBoundingClientRect(),
+      contact:
+        this.shadowRoot!.querySelector('#contact')!.getBoundingClientRect(),
+    };
+    // Agrega el evento que determina en que seccion de la
     // pagina se esta segun la posicion del scroll
     window.addEventListener('scroll', () => {
+      // Detecta la posicion actual en la pagina
       const actualPos = window.pageYOffset;
-      let offSet = 150;
-      if (actualPos < this.distances[0].range.top + offSet) {
+      let offSet = 200;
+      // Define en que seccion se esta posicionado
+      if (actualPos < distances.home.top + offSet) {
         this.selected = 'home';
-      } else if (actualPos < this.distances[1].range.top + offSet) {
+      } else if (actualPos < distances.about.top + offSet) {
         this.selected = 'about';
-      } else if (actualPos < this.distances[2].range.top + offSet) {
+      } else if (actualPos < distances.knowledge.top + offSet) {
         this.selected = 'knowledge';
-      } else if (actualPos < this.distances[3].range.top + offSet) {
+      } else if (actualPos < distances.proyects.top + offSet) {
         this.selected = 'proyects';
-      } else if (actualPos < this.distances[4].range.top + offSet) {
+      } else if (actualPos < distances.contact.top + offSet) {
         this.selected = 'contact';
       }
     });
