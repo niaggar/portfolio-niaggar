@@ -126,6 +126,7 @@ class NavBar extends LitElement {
           <ul>
             <li
               id="home"
+              class="active"
               @click=${() => {
                 this._changeRoute('home');
               }}

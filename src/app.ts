@@ -84,41 +84,36 @@ class App extends LitElement {
 
   // Primera actualizacion de la pagina
   firstUpdated() {
-    // Determina la posicion de cada seccion en la pagina
-    let distances: Distances = {
-      home: this.shadowRoot!.querySelector('#home')!.getBoundingClientRect(),
-      about: this.shadowRoot!.querySelector('#about')!.getBoundingClientRect(),
-      knowledge:
-        this.shadowRoot!.querySelector('#knowledge')!.getBoundingClientRect(),
-      proyects:
-        this.shadowRoot!.querySelector('#proyects')!.getBoundingClientRect(),
-      contact:
-        this.shadowRoot!.querySelector('#contact')!.getBoundingClientRect(),
-    };
+    window.scrollTo(0, 0);
     // Agrega el evento que determina en que seccion de la
     // pagina se esta segun la posicion del scroll
     window.addEventListener('scroll', () => {
+
+      let sectionWidth = this.shadowRoot!.getElementById('page')!.clientHeight / 5;
+      let distances = {
+        home: sectionWidth * 0,
+        about: sectionWidth * 1,
+        knowledge: sectionWidth * 2,
+        proyects: sectionWidth * 3,
+        contact: sectionWidth * 4,
+      }
+
       // Detecta la posicion actual en la pagina
       const actualPos = window.pageYOffset;
-      let offSet = 200;
+      let offSet = sectionWidth / 2;
       // Define en que seccion se esta posicionado
-      if (actualPos < distances.home.top + offSet) {
+      if (actualPos < distances.home+ offSet) {
         this.selected = 'home';
-      } else if (actualPos < distances.about.top + offSet) {
+      } else if (actualPos < distances.about + offSet) {
         this.selected = 'about';
-      } else if (actualPos < distances.knowledge.top + offSet) {
+      } else if (actualPos < distances.knowledge + offSet) {
         this.selected = 'knowledge';
-      } else if (actualPos < distances.proyects.top + offSet) {
+      } else if (actualPos < distances.proyects + offSet) {
         this.selected = 'proyects';
-      } else if (actualPos < distances.contact.top + offSet) {
+      } else if (actualPos < distances.contact + offSet) {
         this.selected = 'contact';
       }
     });
-    // Cada que se actualice la pagina regresa al home
-    setTimeout(() => {
-      this._changeRoute('home');
-      window.scrollTo(0, 0);
-    }, 300);
   }
 
   // Uso de render para generar el componente en el html
