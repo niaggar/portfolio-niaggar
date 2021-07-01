@@ -45,7 +45,7 @@ class HomeSect extends LitElement {
 
     .title {
       font-family: 'Arvo', serif;
-      font-size: 3.4rem;
+      font-size: 4.4rem;
       font-weight: normal;
     }
 
@@ -57,7 +57,7 @@ class HomeSect extends LitElement {
     .subtitle {
       margin-top: 15px;
       font-size: 1.4rem;
-      font-family: 'Source Sans Pro', sans-serif;
+      font-family: 'Lato', sans-serif;
       font-weight: 300;
     }
 
@@ -84,8 +84,7 @@ class HomeSect extends LitElement {
             Hola! <br />soy <span class="important">Nicolas</span>
           </h1>
           <p class="subtitle">
-            Aspirante a desarrollador web<br />
-            & data scientist...
+            Estudiante de Física y desarrollador.
           </p>
         </div>
       </div>
