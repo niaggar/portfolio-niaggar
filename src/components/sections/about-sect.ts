@@ -67,6 +67,7 @@ class AboutSect extends LitElement {
   `;
 
   render() {
+    console.log(img, typeof(img))
     return html`
       <div id="border">
         <div class="content-txt">
