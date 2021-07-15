@@ -33,16 +33,19 @@ class iconKnow extends LitElement {
       border-radius: 5pt;
       border: 2px dashed #f7f7f745;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       cursor: pointer;
       transition: ease 0.6s;
+      position: relative;
+      overflow: hidden;
     }
 
     #container > svg {
       width: 3.4rem !important;
       height: 3.4rem !important;
-      transition: ease 1s;
+      transition: ease 0.2s;
       fill: #f7f7f745;
     }
 
@@ -52,13 +55,25 @@ class iconKnow extends LitElement {
     }
 
     #container:hover > svg {
-      width: 4rem !important;
-      height: 4rem !important;
+      width: 2.5rem !important;
+      height: 2.5rem !important;
       fill: var(--color-main);
     }
 
     .more-info {
-      display: none;
+      overflow: hidden;
+      height: 0;
+      color: var(--color-main);
+      transition: height linear 0.3s;
+    }
+
+    .more-info * {
+      text-align: center;
+      line-height: 0;   
+    }
+
+    #container:hover .more-info {
+      height: 3rem;
     }
   `;
 
@@ -70,9 +85,16 @@ class iconKnow extends LitElement {
         ${images[this.img]}
         <div class="more-info">
           <h3>${this.name}</h3>
-          <p>${this.level}</p>
+          <p>${this.renderRating(this.level)}</p>
         </div>
       </div>
     `;
+  }
+
+  renderRating(ratingNumber: number): string {
+    let starField = '★';
+    let starUnfield = '☆';
+    let ratingString = starField.repeat(ratingNumber) + starUnfield.repeat(5 - ratingNumber);
+    return ratingString;
   }
 }

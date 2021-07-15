@@ -109,6 +109,7 @@ class KnowledgeSect extends LitElement {
     return html`
       <div id="border">
         <div class="content">
+          <h2>Tecnologias que conozco</h2>
           <div class="colum-cards">
             ${this.knowledge.map((e) => {
               return html`<icon-know name=${e.name} level=${e.level} img=${e.img}></icon-know>`
